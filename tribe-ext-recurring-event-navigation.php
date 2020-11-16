@@ -4,7 +4,7 @@
  * Plugin URI:        https://theeventscalendar.com/extensions/recurring-event-navigation/
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-recurring-event-navigation
  * Description:       Adds previous / next in the series navigation on the single event page of a recurring event.
- * Version:           0.9.0
+ * Version:           0.9.1
  * Extension Class:   Tribe\Extensions\RecurringEventNavigation\Main
  * Author:            Modern Tribe, Inc.
  * Author URI:        http://m.tri.be/1971
@@ -56,6 +56,7 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 			}
 
 			add_action( 'tribe_template_after_include:events/single-event/recurring-description', [ $this, 'render_recurring_event_navigation' ], 10, 3 );
+			add_action( 'tribe_events_single_event_before_the_content', [ $this, 'render_recurring_event_navigation' ] );
 		}
 
 		/**
@@ -65,7 +66,7 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		 * @param $name
 		 * @param $template
 		 */
-		public function render_recurring_event_navigation( $file, $name, $template ) {
+		public function render_recurring_event_navigation( $file = null, $name = null, $template = null ) {
 			?>
 			<div class="tribe-events-single-event-recurrence-recurrence-navigation">
 				<p>
